@@ -100,7 +100,7 @@ function updateContact(id){
 		    		alert('Something went wrong. Contact not updated');
 		    	}
 		    	else{
-		    		//it worked, reset the colors
+		    	    //it worked, reset the colors
 		    	    var nameField = $('#'+id+'>td>input[name=name]');
 					var phoneField = $('#'+id+'>td>input[name=phone]');
 					var emailField = $('#'+id+'>td>input[name=email]');
@@ -133,6 +133,9 @@ function deleteContact(id){
 function search(){
 	var searchValue = $('#searchInput').val().toLowerCase();
 	var name='';
+	
+	//reset list so get all results
+	showAllContacts();
 
 	results = $('tr').filter(function(){
 		name = $(this)[0].cells[0].children[0].value.toLowerCase();
