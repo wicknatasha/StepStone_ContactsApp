@@ -1,0 +1,48 @@
+## Questions
+
+1. Write a function to remove duplicate values from an array.  (Assume all values of the array are simple, lowercase strings) 
+
+
+	In a normal situation, I would call array_unique().  
+
+			$withoutDupes = array_unique($arrayOfStrings);
+
+
+	If I was writing my own function for it, I would use an associative array/hash for it.
+
+	function removeDuplicates($arrayOfStrings){
+
+			$withoutDupes = [];
+
+			foreach($arrayOfStrings as $string){
+					$withoutDupes[$string] = 1;
+			}
+
+			return array_keys($withoutDupes);
+	}
+
+
+
+
+2. Why use server side filtering instead of client side filtering?
+
+	If you want to send less data over from the server, if you're filtering on a large data set.
+	
+	
+
+3. What is jQuery and why would you choose to use it, or choose not to use it?
+	
+	jQuery is a JavaScript library. It makes some things easier to do with less typing.
+	I'm not sure why not to use it, I'll have to research this one.
+	
+
+
+
+4. What's wrong with this snippet of code?
+	$name = $_POST['name'];
+	$query = 'insert into friends (name) values ("' . $name . '")';
+	mysqli_query($connection, $query);
+
+		The insert statement should use binding to avoid SQL injection.
+
+
