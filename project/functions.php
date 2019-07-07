@@ -1,14 +1,15 @@
 <?php
 
-$db = new SQLite3('contactsApp_nw19.db');
+$db = null;
 
-if($db){
-	$db->exec('CREATE TABLE IF NOT EXISTS contacts (name varchar(50), phone varchar(20), email varchar(50))'); 
-	//permissions so db can write to the file
-	chmod('contactsApp_nw19.db', 0755);
-}
-else{
-	echo 'ERROR creating database for Contacts App. Check permissions on the project folder.';
+try{
+	$db = new SQLite3('contactsApp_nw19.db');
+	if($db){
+		$db->exec('CREATE TABLE IF NOT EXISTS contacts (name varchar(50), phone varchar(20), email varchar(50))');
+	}
+}catch(Exception $e){
+	echo "<h4>Please run 'chmod 777 project' from the StepStone_ContactsApp folder to give database file permissions.</h4>";
+	exit();
 }
 	
 	
@@ -29,8 +30,7 @@ if(isset($_POST['do'])){
 
 #Add a new contact
 function addContact($name, $phone, $email){
-	global $db;
-echo 'what is happening';	
+	global $db;	
 	$sql = $db->prepare("INSERT INTO contacts VALUES (:name, :phone, :email)");
 	$sql->bindValue(':name',$name);
 	$sql->bindValue(':phone',$phone);
